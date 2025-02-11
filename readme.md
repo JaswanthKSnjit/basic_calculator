@@ -1,5 +1,5 @@
 # Basic Calculator
-<code> </code>
+
 ## Setup Instructions
 
 1. Clone Repo: <code> git clone git@github.com:JaswanthKSnjit/basic_calculator.git </code>
@@ -16,4 +16,4 @@
 
 **NOTE:** The test coverage is at 51% because the testing is done only for 4 operations i.e., <code>add(), subtract(), multiple() and division().</code> For functions like <code> history, print_history(), and clear_history() </code> are not tested because they rely on user interaction and are ignored in the test suite.
 
-**NOTE:** If you face any difficulties please contact me at <code> jk795 </code>
+**NOTE:** If you face any difficulties please contact me at <code> jk795@njit.edu </code>
