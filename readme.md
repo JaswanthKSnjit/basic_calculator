@@ -9,7 +9,7 @@
 5. Install dependencies <code> pip install -r requirements.txt </code>
 6. Open the code in vscode <code> code .</code>
 7. Run the Calculator Program <code> python main.py or python3 main.py </code>
-8. Here you can perform "Add, Subtract, Multiply, Divide, Check Calculation History, Check Last Calculation, Clear History, Use last result in New Calculation, Exit" all these operations
+8. Here you can perform "Add, Subtract, Multiply, Divide, Check Calculation History, Clear History, Quit" all these operations
 9. To run all the tests <code> pytest tests/ </code>
 10. For detailed test result <code> pytest -v </code> 
 11. To check  test coverage <code> pytest --cov </code>
