@@ -1,22 +1,56 @@
+"""Implements a numeric-based calculator with a hidden coverage command."""
+
 from app.operations import Operations
 
 
 class Calculation:
+    """Stores a single arithmetic calculation (operation, operands, result)."""
+
     def __init__(self, operation, num1, num2, result):
+        """
+        Initialize a Calculation instance.
+
+        Args:
+            operation (str): The operation name (e.g. 'addition').
+            num1 (float): First operand.
+            num2 (float): Second operand.
+            result (float): Computed result of the operation.
+        """
         self.operation = operation
         self.num1 = num1
         self.num2 = num2
         self.result = result
 
     def __str__(self):
+        """
+        Return a human-readable representation of the calculation.
+
+        Returns:
+            str: E.g. "3.0 addition 4.0 = 7.0"
+        """
         return f"{self.num1} {self.operation} {self.num2} = {self.result}"
 
 
 class Calculator:
+    """A class providing a REPL for numeric-based arithmetic operations."""
+
     history = []
 
     @classmethod
     def run(cls):
+        """
+        Start the calculator REPL loop.
+
+        Options:
+          1 => addition
+          2 => subtract
+          3 => multiply
+          4 => division
+          5 => history
+          6 => clear
+          7 => quit
+          8 => stoptest (hidden coverage path)
+        """
         print("=========== Calculator Menu ===========")
         print("1) addition")
         print("2) subtract")
@@ -31,7 +65,6 @@ class Calculator:
             action = input("Enter a number (1–7): ").strip().lower()
 
             if action == "7":
-                # Quit
                 print("Exiting calculator. Goodbye!")
                 break
             elif action == "8":
@@ -39,13 +72,11 @@ class Calculator:
                 print("Testing coverage for final line.")
                 return
             elif action == "5":
-                # History
                 print(cls.get_history())
             elif action == "6":
-                # Clear
                 cls.clear_history()
             elif action in ["1", "2", "3", "4"]:
-                # Map numeric choice to actual operation
+                # Map numeric choice to operation name
                 if action == "1":
                     operation = "addition"
                 elif action == "2":
@@ -68,11 +99,16 @@ class Calculator:
             else:
                 print("Invalid choice. Please enter a number from 1 to 7.")
 
-        # For coverage tools that might see code after the while loop
         return
 
     @staticmethod
     def get_inputs():
+        """
+        Prompt for two numeric inputs, or 'quit' to exit.
+
+        Returns:
+            (float | None, float | None): The two numbers, or (None, None) if quitting/invalid.
+        """
         try:
             first = input("Enter the first number: ").strip()
             if first.lower() == "quit":
@@ -89,13 +125,23 @@ class Calculator:
 
     @classmethod
     def compute(cls, operation, num1, num2):
+        """
+        Perform an arithmetic operation on two floats.
+
+        Args:
+            operation (str): One of 'addition', 'subtract', 'multiply', 'division'.
+            num1 (float): First operand.
+            num2 (float): Second operand.
+
+        Returns:
+            float | None: The result, or None if division by zero.
+        """
         operation_map = {
             "addition": Operations.add,
             "subtract": Operations.subtract,
             "multiply": Operations.multiply,
             "division": Operations.divide,
         }
-
         try:
             return operation_map[operation](num1, num2)
         except ZeroDivisionError:
@@ -104,15 +150,29 @@ class Calculator:
 
     @classmethod
     def add_to_history(cls, calculation):
+        """
+        Add a Calculation object to the history list.
+
+        Args:
+            calculation (Calculation): The calculation to store.
+        """
         cls.history.append(calculation)
 
     @classmethod
     def get_history(cls):
+        """
+        Return a string representation of all calculations in history.
+
+        Returns:
+            str: If empty, "No calculations recorded."
+                 Otherwise, each calculation on its own line.
+        """
         if not cls.history:
             return "No calculations recorded."
         return "\n".join(str(calc) for calc in cls.history)
 
     @classmethod
     def clear_history(cls):
+        """Clear all stored calculations."""
         cls.history.clear()
         print("History has been cleared.")
